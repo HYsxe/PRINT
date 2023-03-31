@@ -30,7 +30,7 @@ Additionally, we have implemented the infrastructure for generating pseudo-bulks
 
 Tutorials for running multi-scale footprinting on example data can be found [here][tutorial]
 
-[tutorial]:https://github.com/buenrostrolab/multiScaleFootprinting/blob/main/analyses/BMMCTutorial/BMMCVignette.pdf
+[tutorial]:https://github.com/HYsxe/PRINT/blob/main/analyses/BMMCTutorial/BMMCVignette.pdf
 
 ### 4. References
 
