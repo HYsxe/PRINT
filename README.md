@@ -32,6 +32,8 @@ Tutorials for running multi-scale footprinting on example data can be found [her
 
 [tutorial]:https://github.com/HYsxe/PRINT/blob/main/analyses/BMMCTutorial/BMMCVignette.pdf
 
+Before running the tutorial, please download the pre-computed bias files from https://zenodo.org/record/7121027#.ZCbw4uzMI8N and put it in the data/shared/precomputedTn5Bias folder.
+
 ### 4. References
 
 Hu et al., Multi-scale chromatin footprinting reveals wide-spread encoding of CRE substructures
@@ -43,4 +45,9 @@ Currently the framework can be installed by cloning the github repo.
 ### 6. Support
 
 If you have any questions, please feel free to open an issue. You are also welcome to email me at yanhu@g.harvard.edu. We appreciate everyone's contribution!
+
+
+### 7. Comming soon:
+
+Currently the tool is implemented in R, which doesn't handle certein computation in the most efficient way. We are working on a ultra-fast python package which will be released soon. Stay tuned!
 
