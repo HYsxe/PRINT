@@ -2,7 +2,7 @@
 if (Sys.getenv("RSTUDIO") == "1"){
   setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 }
-
+source("../../code/utils.R")
 library(Seurat)
 library(Signac)
 library(SummarizedExperiment)
@@ -159,13 +159,13 @@ dev.off()
 #################
 
 # Calculate gene scores
-geneScores <- BuenRTools::getGeneScoresFromPeaks(scATACSE, 
-                                                 genome = "mm10", 
-                                                 TSSwindow = 10000, 
-                                                 getWeightsOnly = FALSE)
+geneScores <- getGeneScoresFromPeaks(scATACSE, 
+                                     genome = "mm10", 
+                                     TSSwindow = 10000, 
+                                     getWeightsOnly = FALSE)
 
 # Normalize gene scores
-geneScores <- BuenRTools::centerCounts(geneScores)
+geneScores <- centerCounts(geneScores)
 
 # Calculate gene score of cluster markers
 seuratClusters <- scATACSeurat$seurat_clusters

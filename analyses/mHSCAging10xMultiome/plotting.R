@@ -77,13 +77,13 @@ pseudobulkCenters$group <- pseudobulkNames
 #########################################
 
 # Calculate gene scores
-geneScores <- BuenRTools::getGeneScoresFromPeaks(scATACSE, 
-                                                 genome = "mm10", 
-                                                 TSSwindow = 10000, 
-                                                 getWeightsOnly = FALSE)
+geneScores <- getGeneScoresFromPeaks(scATACSE, 
+                                     genome = "mm10", 
+                                     TSSwindow = 10000, 
+                                     getWeightsOnly = FALSE)
 
 # Normalize gene scores
-geneScores <- BuenRTools::centerCounts(geneScores, chunkSize = 1e4)
+geneScores <- centerCounts(geneScores, chunkSize = 1e4)
 
 # Marker genes to plot
 markers <- c("Cd3d", "Gata1", "Cd79a", "Selp",
@@ -164,7 +164,7 @@ dev.off()
 scRNAMtx <- scRNASeurat@assays$RNA@counts
 
 # Normalize RNA data
-scRNAMtx <- BuenRTools::centerCounts(scRNAMtx, chunkSize = 5000)
+scRNAMtx <- centerCounts(scRNAMtx, chunkSize = 5000)
 
 # Smooth the gene scores of marker genes
 KNN <- FNN::get.knn(scATACSeurat@reductions$lsi@cell.embeddings[colnames(scRNASeurat), 2:20], k = 500)$nn.index

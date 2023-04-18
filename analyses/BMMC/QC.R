@@ -2,6 +2,7 @@
 if (Sys.getenv("RSTUDIO") == "1"){
   setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 }
+source("../../code/utils.R")
 library(ggplot2)
 library(Seurat)
 library(GenomicRanges)
@@ -66,7 +67,7 @@ dev.off()
 
 norm <- 100
 flank <- 2000
-TSS <- sort(sortSeqlevels(BuenRTools::hg38TSSRanges))
+TSS <- sort(sortSeqlevels(FigR::hg38TSSRanges))
 chr <- paste0(seqnames(TSS))
 chr <- gtools::mixedsort(intersect(chr, paste0(seqnames(TSS))))
 splitTSS <- split(GenomicRanges::resize(TSS,1,"start"), seqnames(TSS))[chr]
@@ -134,7 +135,7 @@ markers <- c("CD34", "TCL1A", "CD79A", "CD4", "CD3D", "GIMAP5", "CREM",
              "HBA2", "GNG11")
 
 scRNACounts <- scRNASeurat@assays$RNA@counts
-scRNACounts <- BuenRTools::centerCounts(scRNACounts, chunkSize = 1e5)
+scRNACounts <- centerCounts(scRNACounts, chunkSize = 1e5)
 
 pdf("../../data/BMMC/plots/QC/RNADotPlot.pdf",
     width = 7, height = 5.5)
@@ -155,13 +156,13 @@ scATACSE <- SummarizedExperiment::SummarizedExperiment(
 )
 
 # Calculate gene scores
-geneScores <- BuenRTools::getGeneScoresFromPeaks(scATACSE, 
-                                                 genome = "hg38",
-                                                 TSSwindow = 10000, 
-                                                 getWeightsOnly = FALSE)
+geneScores <- getGeneScoresFromPeaks(scATACSE, 
+                                     genome = "hg38",
+                                     TSSwindow = 10000, 
+                                     getWeightsOnly = FALSE)
 
 # Normalize gene scores
-geneScores <- BuenRTools::centerCounts(geneScores, chunkSize = 1e5)
+geneScores <- centerCounts(geneScores, chunkSize = 1e5)
 
 pdf("../../data/BMMC/plots/QC/ATACDotPlot.pdf",
     width = 7, height = 5.5)

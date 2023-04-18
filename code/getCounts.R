@@ -1,35 +1,5 @@
 # All the functions needed for getting the group-by-region-by-position counts tensor from a fragment file
 
-# Read from a fragments file and retrieve GRanges of fragments
-fragsToRanges <- function (fragFile, # Path to the fragments file
-                           barcodeList = NULL, # Whether to use a specific list of barcodes
-                           startsAre0based = TRUE, # Whether the coordinates are 0-based 
-                           nrows=Inf # Number of rows to read in
-                           ) 
-{
-  cat("Reading in fragment file ..\n")
-  if (is.null(barcodeList)) {
-    
-    cat("Reading all barcodes found within file ..\n")
-    frags <- data.table::fread(fragFile, sep = "\t", showProgress = TRUE, nrows=nrows) %>% 
-      data.frame() %>% GenomicRanges::makeGRangesFromDataFrame(seqnames.field = "V1", 
-                                                               start.field = "V2", end.field = "V3", keep.extra.columns = TRUE, 
-                                                               starts.in.df.are.0based = startsAre0based)
-  }
-  else {
-    
-    cat("Reading only select barcodes specified within list from file ..\n")
-    frags <- data.table::fread(fragFile, sep = "\t", showProgress = TRUE, nrows=nrows) %>% 
-      data.frame() 
-    
-    frags <- frags %>% filter(V4 %in% barcodeList) %>% 
-      GenomicRanges::makeGRangesFromDataFrame(seqnames.field = "V1", 
-                                              start.field = "V2", end.field = "V3", keep.extra.columns = TRUE, 
-                                              starts.in.df.are.0based = startsAre0based)
-  }
-  return(frags)
-}
-
 # Method to get countTensor from the footprintingProject object
 setGeneric("countTensor", function(x) standardGeneric("countTensor"))
 
