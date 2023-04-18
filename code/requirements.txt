@@ -67,6 +67,7 @@ evaluate==0.15
 fansi==1.0.2
 farver==2.1.0
 fastmap==1.1.0
+FigR==0.1.0
 foreach==1.5.1
 generics==0.1.2
 GenomeInfoDb==1.28.4
