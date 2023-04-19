@@ -1,3 +1,15 @@
+splitAndFetch <- function (vec, delim, part) 
+{
+  if (length(part) == 1) {
+    sapply(strsplit(as.character(vec), delim, fixed = TRUE), 
+           "[[", part)
+  }
+  else {
+    sapply(strsplit(as.character(vec), delim, fixed = TRUE), 
+           function(x) paste(x[part], collapse = delim))
+  }
+}
+
 geneCorr <- function(ATAC, # ATAC feature (e.g., Footprint or CRE) RangedSummarizedExperiment
                      RNA, # Gene-by-pseudobulk (or -by-single cell) matrix of RNA. Should be log-normalized
                      genome, # Must be one of "hg19", "mm10", or "hg38"
@@ -53,11 +65,11 @@ geneCorr <- function(ATAC, # ATAC feature (e.g., Footprint or CRE) RangedSummari
   if (!genome %in% c("hg19", "hg38", "mm10")) 
     stop("You must specify one of hg19, hg38 or mm10 as a genome build for currently supported TSS annotations..\n")
   switch(genome, hg19 = {
-    TSSg <- BuenRTools::hg19TSSRanges
+    TSSg <- FigR::hg19TSSRanges
   }, hg38 = {
-    TSSg <- BuenRTools::hg38TSSRanges
+    TSSg <- FigR::hg38TSSRanges
   }, mm10 = {
-    TSSg <- BuenRTools::mm10TSSRanges
+    TSSg <- FigR::mm10TSSRanges
   })
   
   # Keep genes that have annotation 
@@ -248,7 +260,7 @@ geneCorr <- function(ATAC, # ATAC feature (e.g., Footprint or CRE) RangedSummari
   # Swap feature numbers to match reference input feature numbers
   # This only changes if some features had zero signal and were filtered out
   # Use rownames from reference
-  corrResults$Feature <- as.numeric(BuenRTools::splitAndFetch(rownames(ATACmat)[corrResults$Feature],"Feature",2))
+  corrResults$Feature <- as.numeric(splitAndFetch(rownames(ATACmat)[corrResults$Feature],"Feature",2))
   
   cat("\nFinished!\n")
   
