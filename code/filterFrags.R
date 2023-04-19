@@ -30,4 +30,3 @@ fragsFilt <- frags %>% filter(V4 %in% colnames(scATACFilt))
 fragsGz <- gzfile("all.frags.filt.tsv.gz", "w")
 write.table(fragsFilt, fragsGz, quote = F, sep = "\t", col.names = F, row.names = F)
 close(fragsGz)
-

@@ -37,4 +37,5 @@ summitsToCleanPeaks(summitFiles = paste0("peakCalling/", summitFile),
                     resizeTo = 1000 # Re-size peaks after filtering?
 )
 
+# Rename file
 system("mv peakCalling/filtered.fixedwidthpeaks_800bp_1000reSized.bed peaks.bed")
