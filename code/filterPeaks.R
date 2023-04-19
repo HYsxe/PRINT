@@ -1,6 +1,5 @@
 source("../../code/utils.R")
 library("data.table")
-library(BuenRTools)
 library(GenomicRanges)
 
 # Get reference genome from command line arguments

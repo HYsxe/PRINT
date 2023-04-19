@@ -146,7 +146,7 @@ write.table(diffCompare, "../../data/mHSCAging10xMultiome/diff_CRE_substructure_
 ###################################################################
 
 # Find TSSs of differential genes
-TSS <- BuenRTools::mm10TSSRanges
+TSS <- FigR::mm10TSSRanges
 diffTSS <- TSS[TSS$gene_name %in% rownames(diffRNA)[diffRNA$padj < 0.1]]
 diffTSS$log2FC  <- diffRNA$log2FoldChange[diffTSS$gene_name]
 

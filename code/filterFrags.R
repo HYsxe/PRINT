@@ -10,7 +10,7 @@ peaks <- GRanges(seqnames = peakBed$V1,
                  ranges = IRanges(start = peakBed$V2, end = peakBed$V3))
 
 # Get peak-by-cell count matrix
-scATAC <- BuenRTools::getCountsFromFrags("all.frags.tsv.gz", peaks)
+scATAC <- getCountsFromFrags("all.frags.tsv.gz", peaks)
 
 # Filter by FRIP and depth
 FRIPThreshold <- 0.3
