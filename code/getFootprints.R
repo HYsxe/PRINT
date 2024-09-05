@@ -387,6 +387,11 @@ footprintScoring <- function(Tn5Insertion, # Integer vector of raw observed Tn5 
                              footprintRadius = 10, # Radius of the footprint region
                              flankRadius = 10 # Radius of the flanking region (not including the footprint region)
 ){
+
+  # Check if dispersionModel is properly loaded
+  if(is.null(dispersionModel)){
+      stop("dispersionModel is NULL! Need to load the model first")
+  }
   
   modelWeights <- dispersionModel$modelWeights
   
